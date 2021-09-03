@@ -24,6 +24,7 @@
 		<section class="">
 			<div>
 				<h1 style="text-align: center;">Create Account</h1>
+				<?php echo $this->session->flashdata('Message2');?>
 				
 			</div>
 			<div class="container">
