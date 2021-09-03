@@ -16,7 +16,7 @@ class Registration extends CI_Controller {
 		}
 		else
 		{
-			//store and redirect 
+			//store and redirect
 			$fname=$this->input->post('fname');
 			$lname=$this->input->post('lname');
 			$email=$this->input->post('email');
@@ -25,6 +25,20 @@ class Registration extends CI_Controller {
 			$City=$this->input->post('city');
 			$zipcode=$this->input->post('zpcode');
 			$state=$this->input->post('state');
+			
+			$this->db->from('user');
+			$this->db->select('*');
+            $this->db->where('email', $email);
+            $query = $this->db->get();
+            $result=$query->result();
+            if($result)
+			{
+				
+				$this->session->set_flashdata('Message2', '<script>alert("Email Id already exist");</script>');
+				redirect(base_url().'Registration');
+			}
+			else
+			{
 			$data = array(
 				'fname' => $fname,
 				'lname' => $lname,
@@ -36,9 +50,12 @@ class Registration extends CI_Controller {
 				'state'=> $state,
 				'country'=>'Canada',
 			);
-			$this->db->insert('user', $data);
-			redirect(base_url().'login');
 			
+			$this->db->insert('user', $data);
+			$this->session->set_flashdata('Message', '<script>alert("Account created successfully");</script>');
+			redirect(base_url().'login');
+
+			}
 			
 		}
 		
