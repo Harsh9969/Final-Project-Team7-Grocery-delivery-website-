@@ -26,12 +26,7 @@
 		<a href="<?php echo base_url();?>"><span><i class="fas fa-home fa-3x"></i></span></a>
 	</div>
 		<div class="main-content-area">
-			<!-- page-header-section start -->
-
-			<!-- page-header-section end -->
-
-
-
+			
 			<section class="login-section section-ptb">
 				<div>
 					<h1 style="text-align: center;">Login</h1>
@@ -46,21 +41,21 @@
 
 									<div class="input-item">
 										<label>Email</label>
-										<input type="email" name="email" placeholder="Email Address" />
+										<input type="email" name="email" id="em" placeholder="Email Address"/>
 									</div>
 
 									<div class="input-item">
 										<label>Password</label>
-										<input type="password" name="password" placeholder="Password" />
+										<input type="password" name="password" id="pwd" placeholder="Password" />
 									</div>
 
 									<div>
-										<a style="text-align:right;color:blue" href="<?php echo base_url();?>Forgotpassword">Forgot Password</a>
+										<a style="text-align:right;color:blue" href="<?php echo base_url();?>Forgotpassword" id="fp">Forgot Password</a>
 									</div>
 									<div>
-										<button type="submit" class="btn btn-warning">Sign In</button>
+										<button type="submit" class="btn btn-warning" id="btnsignin">Sign In</button>
 									</div>
-									<a href="<?php echo base_url();?>Registration" style="text-align:right;color:blue">Don't have an Account?Sign Up</a>
+									<a href="<?php echo base_url();?>Registration" style="text-align:right;color:blue" id="signup">Don't have an Account?Sign Up</a>
 									
 									<h5 style="text-align: center;color:red"><?php echo validation_errors(); ?></h5>
 								</form>
@@ -89,7 +84,4 @@
 
 
 </body>
-
-
-
 </html>
