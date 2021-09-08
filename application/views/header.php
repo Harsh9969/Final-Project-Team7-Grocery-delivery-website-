@@ -37,8 +37,8 @@
 			<ul class="navbar-nav mr-auto">
 				
 				<li class="ml-sm-5">
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+					<form action="<?php echo base_url();?>Category/search" method="GET" class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" name="name" type="search" placeholder="Search" aria-label="Search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</li>
@@ -48,13 +48,14 @@
 		
 			<div class="form-inline my-2 my-lg-0">
 				<ul class="navbar-nav mr-auto">
-				<li class="wish-list mr-3"><a href=""><i class="fas fa-heart"></i> </a></li>
+				<li class="wish-list mr-3"><a href="<?php echo base_url();?>wishlist"><i class="fas fa-heart"></i> </a></li>
 				<li class="cart-option mr-3"  ><a onclick="" href="<?php echo base_url();?>Cart"><span class="cart-icon"><i class="fas fa-shopping-cart"></i></a></li>	
 						
 				<?php if($this->session->User)
 					{
 					?>
 						<li class="signin-option  mr-3"><a href="<?php echo base_url(); ?>Dashboard/address"><i class="fas fa-user"></i>My Account</a></li>
+						<li class="signin-option  mr-3"><a href="<?php echo base_url(); ?>Dashboard/myorder"><i class="fas fa-user"></i>My Order</a></li>
 						<li class="signin-option  mr-3"><a href="<?php echo  base_url().'Logout'?>"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 					<?php
 					}
