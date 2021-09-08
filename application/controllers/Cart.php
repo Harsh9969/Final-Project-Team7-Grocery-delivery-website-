@@ -24,16 +24,114 @@ class Cart extends CI_Controller {
 		}
 		$userid=$this->session->User;
 		$productid=$this->input->get('productid');
-		$data = array(
+
+
+		$this->db->from('cart');
+		$this->db->select('*');
+		$this->db->where('userid', $userid);
+		$this->db->where('itemid', $productid);
+		$query = $this->db->get();
+		$result=$query->result();
+		// die(print_r($result));
+		if($result)
+		{
+			$data1['qty']=($result[0]->qty)+1;
+			$this->db->where('itemid', $productid);
+			$this->db->update('cart', $data1);
+			echo ($result[0]->qty)+1;
+		}
+		else
+		{
+			$data = array(
 			'userid' => $userid,
 			'itemid' => $productid,
 			'qty' => 1,
-		);
-		return $this->db->insert('cart', $data);
+			);
+			echo 1;
+			$result =$this->db->insert('cart', $data);
+		}
+		
 	}
 	public function removefromcart()
 	{
-		$userid=$this->input->get('userid');
+		if(!$this->session->User)
+		{
+			die("Please Login First");
+		}
+		$userid=$this->session->User;
 		$productid=$this->input->get('productid');
+		$this->db->from('cart');
+		$this->db->select('*');
+		$this->db->where('userid', $userid);
+		$this->db->where('itemid', $productid);
+		$query = $this->db->get();
+		$result=$query->result();
+		// die(print_r($result));
+		if($result)
+		{
+			if($result[0]->qty==1)
+			{
+				$this->db->where('userid', $userid);
+				$this->db->where('itemid', $productid);
+				$this->db->delete('cart');
+				echo "delete";
+			}
+			else{
+				$data1['qty']=($result[0]->qty)-1;
+				$this->db->where('itemid', $productid);
+				$this->db->update('cart', $data1);
+				echo ($result[0]->qty)-1;
+			}
+			
+		}
+		else
+		{
+			echo "ITEM NOT FOUND";
+		}
+	}
+	public function checkitem()
+	{
+		$userid=$this->session->User;
+		$productid=$this->input->get('productid');
+		$this->db->from('cart');
+		$this->db->select('*');
+		$this->db->where('userid', $userid);
+		$this->db->where('itemid', $productid);
+		$query = $this->db->get();
+		$result=$query->result();
+		// die(print_r($result));
+		if($result)
+		{
+			echo $result[0]->qty;
+		}
+	}
+
+	public function deletefromcart()
+	{
+		if(!$this->session->User)
+		{
+			die("Please Login First");
+		}
+		$userid=$this->session->User;
+		$productid=$this->input->get('productid');
+		$this->db->from('cart');
+		$this->db->select('*');
+		$this->db->where('userid', $userid);
+		$this->db->where('itemid', $productid);
+		$query = $this->db->get();
+		$result=$query->result();
+		// die(print_r($result));
+		if($result)
+		{
+			
+				$this->db->where('userid', $userid);
+				$this->db->where('itemid', $productid);
+				$this->db->delete('cart');
+				echo "delete";
+		}
+		else
+		{
+			echo "ITEM NOT FOUND";
+		}
 	}
 }
