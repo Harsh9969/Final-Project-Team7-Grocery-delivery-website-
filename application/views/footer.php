@@ -7,10 +7,7 @@
 						<div class="row">
 							<div class="col-md-6 col-lg-3">
 								<div class="footer-widget">
-									<a href="" class="footer-logo"><img src="<?php echo base_url();?>assets/images/GM.png" style="
-    height: 80px;
-    width: 130px;
-" alt="logo"></a>
+									<a href="" class="footer-logo"><img src="<?php echo base_url();?>assets/images/GM.png" style=" height: 80px; width:130px;"alt="logo"></a>
 									
 									<ul class="social-media-list d-flex flex-wrap">
 										<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -52,10 +49,11 @@
 								<h5 class="footer-title">Feedback</h5>
 									<div class="widget-wrapper">
 									<div>
-
-										<input type="email" placeholder="Email" class="form-control">
-										<input type="text" placeholder="Message" class="form-control">
+										<form method="POST" action="<?php echo base_url();?>Home/feedback">
+										<input type="email" name="em" placeholder="Email"  id="emfed" class="form-control">
+										<input type="text" name="msg" id="msg1" placeholder="Message" class="form-control">
 										<input type="submit" class="btn btn-warning">
+										</form>
 										</div>
 										<div class="payment-method d-flex flex-wrap">
 											<a href="#"><img src="<?php echo base_url();?>assets/images/payment/visa.png" alt="payment"></a>
