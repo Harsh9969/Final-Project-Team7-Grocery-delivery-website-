@@ -14,4 +14,19 @@ class Home extends CI_Controller {
 		$this->load->view('home',$data);
 		$this->load->view('footer');
 	}
+	public function feedback()
+	{
+		$em = $this->input->post('em');
+		$msg = $this->input->post('msg');
+		$data = array(
+			
+			'email' => $em,
+			'message'=>$msg,
+			
+		);
+		
+		$this->db->insert('feedback', $data);
+		redirect(base_url());
+		
+	}
 }
