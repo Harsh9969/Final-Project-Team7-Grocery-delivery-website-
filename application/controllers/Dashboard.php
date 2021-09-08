@@ -25,6 +25,8 @@ class Dashboard extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	
+
 	public function address()
 	{
 		$this->db->select('*');
@@ -68,5 +70,43 @@ class Dashboard extends CI_Controller {
         $this->db->update($table, $data,$where);
 		//die(print_r($data['user']->fname));
 		redirect(base_url()."Dashboard/address");
+	}
+	public function myorder()
+	{
+		$this->db->select('*');
+		$this->db->where('userid', $this->session->User);
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['orders']=$result;
+		$this->load->view('header');
+		$this->load->view('user/myorder',$data);
+		$this->load->view('footer');
+	}
+	public function myorderdetails()
+	{
+		$oid = $this->input->get('orderid');
+		$this->db->select('*');
+		$this->db->where('id', $oid);
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['order']=$result[0];
+		$this->load->view('header');
+		$this->load->view('user/orderdetails',$data);
+		$this->load->view('footer');
+	}
+	public function myorderdetailspdf()
+	{
+		$oid = $this->input->get('orderid');
+		$this->db->select('*');
+		$this->db->where('id', $oid);
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['order']=$result[0];
+		$this->load->view('header');
+		$this->load->view('user/orderdetailspdf',$data);
+		$this->load->view('footer');
 	}
 }
