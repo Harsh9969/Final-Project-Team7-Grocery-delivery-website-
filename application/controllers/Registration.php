@@ -16,16 +16,12 @@ class Registration extends CI_Controller {
 		}
 		else
 		{
-			//store and redirect
+			//store and redirect 
 			$fname=$this->input->post('fname');
 			$lname=$this->input->post('lname');
 			$email=$this->input->post('email');
 			$password=$this->input->post('password');
-			$address=$this->input->post('add');
-			$City=$this->input->post('city');
-			$zipcode=$this->input->post('zpcode');
-			$state=$this->input->post('state');
-			
+
 			$this->db->from('user');
 			$this->db->select('*');
             $this->db->where('email', $email);
@@ -39,6 +35,15 @@ class Registration extends CI_Controller {
 			}
 			else
 			{
+				//store and redirect 
+			$fname=$this->input->post('fname');
+			$lname=$this->input->post('lname');
+			$email=$this->input->post('email');
+			$password=$this->input->post('password');
+			$address=$this->input->post('add');
+			$City=$this->input->post('city');
+			$zipcode=$this->input->post('zpcode');
+			$state=$this->input->post('state');
 			$data = array(
 				'fname' => $fname,
 				'lname' => $lname,
@@ -49,6 +54,7 @@ class Registration extends CI_Controller {
 				'zipcode'=> $zipcode,
 				'state'=> $state,
 				'country'=>'Canada',
+				'status'=>'APPROVED',
 			);
 			
 			$this->db->insert('user', $data);
@@ -56,6 +62,9 @@ class Registration extends CI_Controller {
 			redirect(base_url().'login');
 
 			}
+
+			
+
 			
 		}
 		
