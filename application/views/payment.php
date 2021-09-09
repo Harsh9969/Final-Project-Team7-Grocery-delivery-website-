@@ -44,10 +44,10 @@
 										<input type="text"  name="cardno" maxlength="16" minlength="16" id="cdname" placeholder="Card Number" required/>
 									</div>
 
-									<div class="input-item">
+									<!--<div class="input-item">
 										<label>Expriy Date</label>
 										<input type="month" name="exdate" placeholder="Expriy Date" id="exp" required/>
-									</div>
+									</div>-->
 
 									<div class="input-item">
 										<label>CVV Number</label>
