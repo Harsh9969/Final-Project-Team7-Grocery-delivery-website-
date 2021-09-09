@@ -12,7 +12,7 @@ class Payment extends CI_Controller {
 		else
 		{
 			$this->form_validation->set_rules('cardno', 'Card Number', 'required|numeric');
-        	$this->form_validation->set_rules('exdate', 'Expiry Date', 'required');
+        	//$this->form_validation->set_rules('exdate', 'Expiry Date', 'required');
         	$this->form_validation->set_rules('cvv', 'CVV', 'required|numeric');
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -22,13 +22,13 @@ class Payment extends CI_Controller {
 			else
 			{
 				$cardno=$this->input->post('cardno');
-				$exdate=$this->input->post('exdate');
+				//$exdate=$this->input->post('exdate');
 				$cvv=$this->input->post('cvv');
 				//die($exdate);
 				$this->db->from('card');
 				$this->db->select('*');
 				$this->db->where('cardno', $cardno);
-				$this->db->where('exdate', $exdate);
+				//$this->db->where('exdate', $exdate);
 				$this->db->where('cvv', $cvv);
 				$query = $this->db->get();
 				$result=$query->result();
