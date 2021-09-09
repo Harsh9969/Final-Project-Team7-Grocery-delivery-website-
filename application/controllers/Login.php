@@ -25,13 +25,22 @@ class Login extends CI_Controller {
             $result=$query->result();
             if($result)
 			{
+				if($result[0]->status=="UNAPPROVED")
+				{
+					$this->session->set_flashdata('Message', 'Your Account is Block');
+					$this->load->view('login');
+				}
+				else
+				{
+					$this->session->set_userdata($result);
+					$this->session->set_userdata('User', $result[0]->id);
+					redirect(base_url());
+				}
 				
-				$this->session->set_userdata($result);
-				$this->session->set_userdata('User', $result[0]->id);
 				
-				redirect(base_url());
+				
 			}
-			else if($email=="admin@admin.com" && $password=="admin")
+			else if($email=="admin@gmail.com" && $password=="admin")
 			{
 					$this->session->set_userdata('Admin', 'Admin');
 					redirect(base_url().'Dashboardadmin');

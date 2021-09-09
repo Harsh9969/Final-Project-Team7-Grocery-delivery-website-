@@ -35,4 +35,18 @@ class Category extends CI_Controller {
 		$this->load->view('productdetail',$data);
 		$this->load->view('footer');
 	}
+	public function search()
+	{
+		$name = $this->input->get('name');
+		$this->db->from('product');
+		$this->db->like('name', $name);
+		$this->db->or_like('category', $name);
+		$this->db->or_like('details', $name);
+    	$query = $this->db->get();
+        $result=$query->result();
+		$data['products']=$result;
+		$this->load->view('header');
+		$this->load->view('product',$data);
+		$this->load->view('footer');
+	}
 }
