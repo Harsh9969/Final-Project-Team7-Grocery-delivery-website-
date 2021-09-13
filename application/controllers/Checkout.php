@@ -13,6 +13,20 @@ class Checkout extends CI_Controller {
     }
 	public function index()
 	{
+		if($this->session->Total==0)
+		{
+			
+			$oid=$this->session->oid;
+			$this->db->select('*');
+			$this->db->from('orders');
+			$this->db->where('id',$oid);
+			$query = $this->db->get();
+			$data['osucess']=$query->result();
+			//die($oid);
+			$this->load->view('ordersuccess',$data);
+
+		}
+		else{
 		$this->db->select('*');
 		$this->db->where('id', $this->session->User);
 		$this->db->from('user');
@@ -23,6 +37,7 @@ class Checkout extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('checkout',$data);
 		$this->load->view('footer');
+		}
 	}
 
 	public function updateaddress()
@@ -53,6 +68,6 @@ class Checkout extends CI_Controller {
         );
         $this->db->update($table, $data,$where);
 		//die(print_r($data['user']->fname));
-		redirect(base_url()."Payment");
+		redirect(base_url()."Checkout");
 	}
 }
