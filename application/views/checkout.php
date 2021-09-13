@@ -79,17 +79,28 @@
                                         </div>
     
                                         <div>
-                                            <button type="submit" id="btn" class="btn btn-warning" disabled>Save Changes And Payment</button>
+                                            <button type="submit" id="btn" class="btn btn-warning" disabled>Save Changes</button>
+                                            
                                         </div>
                                     </form>
+                                    <form action="<?php base_url();?>Payment/stripePaymant" method="POST">
+													<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+													data-key="pk_test_51JYBPXItBnaUQyH7lS0DZHZrkNzGQPO8ffSpHcIAuOSxm5o920SueIsUjus7B03cqBDVXrc1o09xhJuoCtQ3rIzJ00PBpyzuAp"
+													data-amount="<?php echo $this->session->Total*100?>"
+													data-name="Grocery Maina"
+													data-description=""
+													data-image=""
+													data-currency="usd"
+													></script>
+									</form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="float:right;margin-right:70px;margin-top:20px;">
-                <a href="<?php echo base_url();?>Payment"><button type="submit" id="btnnext" class="btn btn-warning">Next</button></a>
-                </div>
+               <!-- <div style="float:right;margin-right:70px;margin-top:20px;">
+                <a href="<?php echo base_url();?>"><button type="submit" id="btnnext" class="btn btn-warning">Next</button></a>
+                </div>-->
             </section>
             <!-- dashboard-section end -->
 
