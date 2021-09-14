@@ -72,19 +72,52 @@
 
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					
+					<li class="nav-item">
+						<a href="<?php echo base_url()?>Dashboardadmin/dashboard" class="nav-link ">
+							<i class="nav-icon fas fa-th"></i>
+							<p>
+								Dashboard
+							</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?php echo base_url()?>Dashboardadmin/" class="nav-link active">
+						<i class="fas fa-box-open"></i></i>
+							<p>
+							Add Products
+							</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?php echo base_url()?>Dashboardadmin/viewproduct" class="nav-link">
+						<i class="fas fa-box-open"></i></i>
+							<p>
+								View Products
+							</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="<?php echo base_url()?>Dashboardadmin/viewuser" class="nav-link">
+						<i class="fas fa-users"></i>
+							<p>
+								View User
+							</p>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="<?php echo base_url()?>Dashboardadmin/vieworder" class="nav-link ">
+						<i class="fas fa-shopping-cart"></i>
+							<p>
+								View Order
+							</p>
+						</a>
+					</li>
+		
 				
-						<li class="nav-item">
-							<a href="" class="nav-link active">
-								<i class="nav-icon fas fa-th"></i>
-								<p>
-								Add Products
-								</p>
-							</a>
-						</li>
-				
-						
-					</ul>
+			</ul>
 				</nav>
 				<!-- /.sidebar-menu -->
 			</div>
@@ -174,7 +207,7 @@
 									</div>
 
 									<div>
-										<button type="submit" class="btn btn-info">Add</button>
+										<button type="submit" class="btn btn-primary">Add</button>
 									</div>
 									</form>
 								</div>
