@@ -131,7 +131,51 @@ class Dashboardadmin extends CI_Controller {
 		$this->db->update('product', $data);
 		redirect(base_url()."Dashboardadmin/viewproduct");
 		
+    public function viewuser()
+	{
+		$this->db->select('*');
+		$this->db->from('user');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['users']=$result;
+		$this->load->view('admin/userview',$data);
+	}
+	public function vieworder()
+	{
+		$this->db->select('*');
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['orders']=$result;
+		$this->load->view('admin/orderview',$data);
+	}
+	public function removeproduct()
+	{
+		$productid=$this->input->get('productid');
+		$this->db->where('id', $productid);
+		$this->db->delete('product');
+		redirect(base_url()."Dashboardadmin/viewproduct");
+	}
+	public function removeuser()
+	{
+		$productid=$this->input->get('userid');
+		$this->db->where('id', $productid);
+		$this->db->delete('user');
+		redirect(base_url()."Dashboardadmin/viewproduct");
+	}
 
+	public function viewupdateproduct()
+	{
+		$productid=$this->input->get('productid');
+		$this->db->select('*');
+		$this->db->from('product');
+		$this->db->where('id', $productid);
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['products']=$result[0];
+		
+		$this->load->view('admin/updateproduct',$data);
+	}
 
 		
 	}
@@ -202,4 +246,35 @@ class Dashboardadmin extends CI_Controller {
         $this->db->update($table, $data,$where);
 		redirect(base_url().'Dashboardadmin/viewuser');
     }
+    public function orderdetilas()
+	{
+		$oid = $this->input->get('orderid');
+		$this->db->select('*');
+		$this->db->where('id', $oid);
+		$this->db->from('orders');
+		$query = $this->db->get();
+		$result=$query->result();
+		$data['order']=$result[0];
+		$this->load->view('admin/orderdetails',$data);
+	}
+
+
+	public function removeorder()
+	{
+		$productid=$this->input->get('productid');
+		$this->db->where('id', $productid);
+		$this->db->delete('orders');
+		redirect(base_url()."Dashboardadmin/vieworder");
+	}
+
+
+	public function updateorderstatus()
+	{	
+
+		$oid = $this->input->get('orderid');
+		$status = $this->input->get('status');
+		$data['status']=$status;
+		$this->db->where('id', $oid);
+		echo $this->db->update('orders', $data);
+	}
 }
