@@ -81,4 +81,125 @@ class Dashboardadmin extends CI_Controller {
 		$data['products']=$result;
 		$this->load->view('admin/productview',$data);
 	}
+	
+	public function updateproduct()
+	{
+		$productid=$this->input->post('productid');
+		$category=$this->input->post('category');
+		$name=$this->input->post('name');
+		$price=$this->input->post('price');
+		$details=$this->input->post('details');
+		//$image=$this->input->post('photo');
+		
+			$config['upload_path'] = './assets/images/products/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 2000;
+			$config['max_width'] = 1500;
+			$config['max_height'] = 1500;
+			$config['file_name'] = random_string('alnum', 8);
+
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('photo')) {
+				$data['e1']= array('error' => $this->upload->display_errors());
+				if($data['e1']['error'])
+				{
+					$data = array(
+						'category' => $category,
+						'name' => $name,
+						'price' => $price,
+						'details' => $details,
+						);
+			
+		
+				$this->db->where('id', $productid);
+				$this->db->update('product', $data);
+				redirect(base_url()."Dashboardadmin/viewproduct");
+				}
+			} else {
+				$file = $this->upload->data();
+				$data = array(
+				'category' => $category,
+				'name' => $name,
+				'price' => $price,
+				'details' => $details,
+				'image' => $file['file_name'],
+				);
+				
+			}
+			
+		$this->db->where('id', $productid);
+		$this->db->update('product', $data);
+		redirect(base_url()."Dashboardadmin/viewproduct");
+		
+
+
+		
+	}
+	public function updateuser()
+	{
+		$this->form_validation->set_rules('fname', 'first name', 'required');
+        $this->form_validation->set_rules('lname', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+			//error
+			$this->load->view('signup');
+		}
+		else
+		{
+			//store and redirect 
+			$fname=$this->input->post('fname');
+			$userid=$this->input->post('userid');
+			$lname=$this->input->post('lname');
+			$email=$this->input->post('email');
+			$password=$this->input->post('password');
+			$address=$this->input->post('add');
+			$City=$this->input->post('city');
+			$zipcode=$this->input->post('zpcode');
+			$state=$this->input->post('state');
+			$mobile=$this->input->post('mobile');
+			$data = array(
+				'fname' => $fname,
+				'lname' => $lname,
+				'email' => $email,
+				'password' => $password,
+				'address'=> $address,
+				'city'=> $City,
+				'zipcode'=> $zipcode,
+				'state'=> $state,
+				'mobile'=> $mobile,
+				'country'=>'Canada',
+			);
+			$this->db->where('id', $userid);
+			$this->db->update('user', $data);
+			$this->session->set_flashdata('Message', '<script>alert("Account created successfully");</script>');
+			redirect(base_url().'Dashboardadmin/viewuser');
+
+		}
+	}
+	public function updateuserstatus()
+    {
+        $vid=$this->input->get('userid');
+        $status=$this->input->get('status');
+            
+        $table="user";
+        if("APPROVED"==$status)
+        {
+            $data = array(
+            'status' => "UNAPPROVED",
+            );
+        }else
+        {
+             $data = array(
+            'status' => "APPROVED",
+            );
+        }
+        
+        $where = array(
+            'id' => $vid
+        );
+        $this->db->update($table, $data,$where);
+		redirect(base_url().'Dashboardadmin/viewuser');
+    }
 }
